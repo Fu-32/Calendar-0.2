@@ -1,0 +1,180 @@
+/* --- Importation de la police Inter depuis Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* --- Styles globaux --- */
+body {
+  font-family: 'Inter', sans-serif; /* Applique la police 'Inter' à tout le document */
+  background-color: #f7f7f7;        /* Définit un fond gris très clair pour la page */
+  margin: 0;                        /* Supprime les marges par défaut du navigateur */
+  padding: 0;                       /* Supprime les espacements internes par défaut */
+  color: #333;                      /* Définit la couleur du texte en gris foncé pour une bonne lisibilité */
+}
+
+/* --- Conteneur principal de l'application --- */
+.App {
+  max-width: 800px;                 /* Limite la largeur maximale du conteneur à 800px */
+  margin: 0 auto;                   /* Centre horizontalement le conteneur dans la page */
+  padding: 40px 20px;               /* Ajoute des espacements internes autour du contenu */
+  text-align: center;               /* Centre le texte à l'intérieur du conteneur */
+}
+
+/* --- Titre principal --- */
+h1 {
+  color: #333;                      /* Définit la couleur du titre en gris foncé */
+  margin-bottom: 20px;              /* Ajoute un espace sous le titre */
+  font-size: 2rem;                  /* Définit la taille de la police du titre */
+  font-weight: 500;                 /* Définit une épaisseur de police moyenne */
+}
+
+/* --- Conteneur du calendrier --- */
+.calendar-container {
+  display: flex;                    /* Utilise Flexbox pour la disposition */
+  justify-content: center;          /* Centre le calendrier horizontalement */
+  align-items: center;              /* Centre le calendrier verticalement */
+}
+
+/* --- Styles spécifiques au calendrier --- */
+.react-calendar {
+  font-family: 'Inter', sans-serif; /* Assure que le calendrier utilise la même police que le reste de l'application */
+  border: none;                     /* Supprime les bordures par défaut */
+  width: 100%;                      /* Le calendrier occupe toute la largeur disponible */
+  max-width: 350px;                 /* Limite la largeur maximale à 350px */
+  background: white;                /* Définit un fond blanc pour le calendrier */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour donner de la profondeur */
+  border-radius: 10px;              /* Arrondit les coins du calendrier */
+  padding: 20px;                    /* Ajoute des espacements internes autour du calendrier */
+}
+
+/* --- Navigation du calendrier (boutons de navigation, mois/année) --- */
+.react-calendar__navigation {
+  display: flex;                    /* Utilise Flexbox pour disposer les éléments de navigation */
+  justify-content: space-between;   /* Espace les éléments de manière égale */
+  align-items: center;              /* Aligne les éléments verticalement au centre */
+  margin-bottom: 20px;              /* Ajoute un espace sous la navigation */
+}
+
+.react-calendar__navigation button {
+  background: none;                 /* Supprime le fond par défaut des boutons */
+  border: none;                     /* Supprime les bordures des boutons */
+  font-size: 1.5rem;                /* Définit la taille de la police des boutons */
+  color: #333;                      /* Définit la couleur du texte des boutons */
+  cursor: pointer;                  /* Change le curseur pour indiquer que c'est cliquable */
+}
+
+/* --- En-tête des jours de la semaine --- */
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;        /* Met les noms des jours en majuscules */
+  font-weight: bold;                /* Texte en gras pour les jours de la semaine */
+  font-size: 0.8rem;                /* Réduit légèrement la taille de la police */
+  color: #666;                      /* Définit une couleur grise pour le texte */
+  padding: 10px 0;                  /* Ajoute un espace vertical autour des jours de la semaine */
+  border-bottom: 1px solid #e0e0e0; /* Ajoute une ligne séparatrice sous les jours de la semaine */
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 5px 0;                   /* Ajoute un léger espace vertical à chaque jour */
+}
+
+/* --- Cellules des jours du calendrier --- */
+.react-calendar__tile {
+  display: flex;                    /* Utilise Flexbox pour centrer le contenu */
+  justify-content: center;          /* Centre horizontalement le contenu */
+  align-items: center;              /* Centre verticalement le contenu */
+  aspect-ratio: 1;                  /* Rend chaque cellule carrée (largeur égale à la hauteur) */
+  position: relative;               /* Position relative pour les éléments positionnés absolument à l'intérieur */
+  overflow: hidden;                 /* Cache tout débordement à l'intérieur de la cellule */
+  cursor: pointer;                  /* Change le curseur pour indiquer que la cellule est cliquable */
+}
+
+
+/* --- Styles pour les dates sélectionnées --- */
+.react-calendar__tile--rangeStart,
+.react-calendar__tile--rangeEnd {
+  background: #FF4B4B !important;   /* Fond rouge pour les dates de début et de fin de la plage */
+  color: white;                     /* Texte en blanc pour le contraste */
+  border-radius: 50% !important;    /* Transforme la cellule en cercle complet */
+  z-index: 1;                       /* Place les cercles au-dessus des dates intermédiaires */
+}
+
+/* Dates intermédiaires dans la plage sélectionnée */
+.react-calendar__tile--range {
+  background: #ffd6d6;              /* Fond rouge clair pour les dates entre le début et la fin */
+  color: #333;                      /* Texte en gris foncé pour une bonne lisibilité */
+  border-radius: 0 !important;      /* Supprime l'arrondi pour que les cases soient rectangulaires */
+  margin: 0;                        /* Supprime toute marge autour des cellules */
+  z-index: 0;                       /* Place les cellules derrière les cercles de début et de fin */
+  box-shadow: none;                 /* Supprime toute ombre qui pourrait causer des bordures visibles */
+}
+
+/* Ajustement pour que les cercles et la plage se touchent correctement */
+.react-calendar__tile--rangeStart.react-calendar__tile--rangeEnd {
+  border-radius: 50% !important;    /* Si la plage commence et se termine le même jour, garder le cercle */
+  background: #FF4B4B;              /* Utilise l'accent rouge pour un cercle */
+}
+
+/* --- Date d'aujourd'hui --- */
+.react-calendar__tile--now {
+  background: transparent;          /* Pas de fond spécifique */
+  font-weight: bold;                /* Met en évidence le texte du jour actuel */
+}
+
+/* --- Sélection d'une plage de dates --- */
+
+/* Dates de début et de fin de la plage */
+.react-calendar__tile--rangeStart,
+.react-calendar__tile--rangeEnd {
+  background: #FF4B4B !important;   /* Fond rouge pour les dates de début et de fin de la plage */
+  color: white !important;                     /* Texte en blanc pour le contraste */
+  border-radius: 50% !important;    /* Transforme la cellule en cercle complet */
+}
+
+/* Dates intermédiaires dans la plage sélectionnée */
+.react-calendar__tile--range {
+  background: #ffd6d6;              /* Fond rouge clair pour les dates entre le début et la fin */
+  color: #333;                      /* Texte en gris foncé pour une bonne lisibilité */
+  border-radius: 0;                 /* Pas d'arrondi pour les dates intermédiaires */
+}
+
+.react-calendar__tile--range:hover {
+  background: #FF4B4B ;              /* Change le fond au survol pour un retour visuel */
+  border-radius: 0 !important;      /* Assure que le bord reste carré */
+}
+
+/* --- Effets au survol des cellules du calendrier --- */
+.react-calendar__tile:hover {
+  background-color: transparent !important; /* Fond transparent */
+  color: #333 !important; /* Garde la couleur du texte originale */
+  position: relative; /* Pour le positionnement du pseudo-élément */
+}
+
+.react-calendar__tile:hover::after {
+  content: '';
+  background-color: transparent; /* Fond transparent */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* Ajustez selon vos préférences */
+  height: 100%; /* Ajustez selon vos préférences */
+  border: 2px solid #FF4B4B; /* Bordure rouge */
+  border-radius: 100%;
+  pointer-events: none; /* Permet de cliquer à travers */
+}
+
+/* --- Styles pour les paragraphes de texte --- */
+p {
+  font-size: 1rem;                  /* Définit la taille de la police pour le texte */
+  color: #333;                      /* Texte en gris foncé pour la lisibilité */
+  margin-top: 20px;                 /* Ajoute un espace au-dessus du paragraphe */
+}
+
+/* --- Styles pour la responsivité (petits écrans) --- */
+@media (max-width: 400px) {
+  .react-calendar {
+    padding: 10px;                  /* Réduit le padding pour s'adapter aux petits écrans */
+  }
+  
+  .react-calendar__tile {
+    font-size: 0.9rem;              /* Réduit la taille du texte dans les cellules */
+  }
+}
